@@ -1,3 +1,5 @@
+//#include "header.h"
+//#include "randomWrite.C"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,13 +40,30 @@ int main(int argc, const char * argv[]) {
 
                     lottery[j] = rand() % 35 + 1;
                     sprintf(lotteryStr, "%i", lottery[j]);
-                    printf( "%s ", lotteryStr);
+                    printf( "%2s ", lotteryStr);
 
                     fputs(lotteryStr, fp);
                     fputs(" ", fp);
                     if ((j + 1) % 7 == 0){
                         fputc('\n',fp);
                     }
+                }
+                 printf(" | ");
+                for (int l = 0; l < 7; l++){
+
+                    for(int m = 0;  m < 7; m++){
+
+                        int temp = lottery[l];
+                        lottery[l] = 0;
+
+                        while(temp == lottery[m]){
+                            temp = rand() % 35 + 1;
+                        }
+                        lottery[l] = temp;
+                    }
+                }
+                for(int n = 0; n < 7; n++ ){
+                    printf("%2i ", lottery[n]);
                 }
                 printf("\n");
             }
